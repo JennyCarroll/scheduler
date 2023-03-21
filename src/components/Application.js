@@ -1,6 +1,7 @@
 import React from "react";
 
 import "components/Application.scss";
+import Button from "./Button";
 
 export default function Application(props) {
   return (
