@@ -3,7 +3,7 @@ import "components/InterviewerListItem.scss";
 import classNames from "classnames";
 
 // receives
-// id:number
+// id:number not anymore
 // name: string
 // avatar: url
 // selected: boolean
@@ -16,7 +16,7 @@ export default function InterviewerListItem(props) {
   });
   const interviewerName = props.selected ? props.name : "";
   return (
-    <li className={conditionalClasses} onClick={props.setInterviewer}>
+    <li className={conditionalClasses} onClick={props.onChange}>
       <img
         className="interviewers__item-image"
         src={props.avatar}
