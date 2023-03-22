@@ -4,6 +4,8 @@ import Header from "./Header";
 import Empty from "./Empty";
 import Show from "./Show";
 import Confirm from "./Confirm";
+import Status from "./Status";
+import Error from "./Error";
 
 // A user will be able to create, edit and delete an appointment
 // The <Appointment> component will display differently depending
@@ -33,7 +35,9 @@ export default function Appointment(props) {
         message={props.message}
       />
       {/* async operations ? status (saving or deleting) */}
+      <Status message={props.message} />
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
+      <Error message="Could not delete appointment." onClose={props.onClose} />
     </article>
   );
 }
