@@ -6,6 +6,7 @@ import Show from "./Show";
 import Confirm from "./Confirm";
 import Status from "./Status";
 import Error from "./Error";
+import Form from "./Form";
 
 // A user will be able to create, edit and delete an appointment
 // The <Appointment> component will display differently depending
@@ -30,6 +31,7 @@ export default function Appointment(props) {
       />
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
       <Confirm
+        //doesn't the below have to be onClick with a conditional?
         onConfirm={props.onConfirm}
         onCancel={props.onCancel}
         message={props.message}
@@ -38,6 +40,7 @@ export default function Appointment(props) {
       <Status message={props.message} />
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
       <Error message="Could not delete appointment." onClose={props.onClose} />
+      {/* form a user inputs their information, saves it, and edits it. */}
     </article>
   );
 }
