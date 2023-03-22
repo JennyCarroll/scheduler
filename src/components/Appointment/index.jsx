@@ -3,6 +3,7 @@ import "components/Appointment/styles.scss";
 import Header from "./Header";
 import Empty from "./Empty";
 import Show from "./Show";
+import Confirm from "./Confirm";
 
 // A user will be able to create, edit and delete an appointment
 // The <Appointment> component will display differently depending
@@ -26,6 +27,11 @@ export default function Appointment(props) {
         onDelete={props.onDelete}
       />
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
+      <Confirm
+        onConfirm={props.onConfirm}
+        onCancel={props.onCancel}
+        message={props.message}
+      />
       {/* async operations ? status (saving or deleting) */}
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
     </article>
