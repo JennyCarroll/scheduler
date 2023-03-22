@@ -20,18 +20,19 @@ export default function Appointment(props) {
       {/* header displays the time for the appointment with a separater */}
       <Header time={props.time} />
       {/* every other component is shown conditionally */}
-      {/* !appointment ? empty (click on add button (image) will call on add action) */}
-      {/* <Empty onAdd={props.onAdd} />
-      {/* appointment show (displays name of student and interiewer scheduled, clicking on edit will call onEdit action, clicking on the trash icon will call the on delete action) */}
-      {/* <Show
-        student={props.student}
-        interviewer={props.interviewer}
-        onEdit={props.onEdit}
-        onDelete={props.onDelete}
-      /> */}
+      {props.interview ? (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.name}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
+      ) : (
+        <Empty onAdd={props.onAdd} />
+      )}
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
       {/* <Confirm
-        ///oesn't the below have to be onClick with a conditional?
+        //doesn't the below have to be onClick with a conditional?
         onConfirm={props.onConfirm}
         onCancel={props.onCancel}
         message={props.message}
