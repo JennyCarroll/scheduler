@@ -16,7 +16,7 @@ export default function InterviewerListItem(props) {
   });
   const interviewerName = props.selected ? props.name : "";
   return (
-    <li className={conditionalClasses} onClick={props.onChange}>
+    <li className={conditionalClasses} onClick={props.setInterviewer}>
       <img
         className="interviewers__item-image"
         src={props.avatar}
