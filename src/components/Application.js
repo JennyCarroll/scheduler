@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "components/Application.scss";
-import Button from "./Button";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import axios from "axios";
-import { getAppointmentsForDay } from "../helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
 
 export default function Application() {
   const [state, setState] = useState({
@@ -15,6 +14,20 @@ export default function Application() {
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  //transfor the code before passing it as a prop to the appointment
+  const schedule = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
+  });
 
   //state = day,  days, appts.  take day and replace it with day
   const setDay = (day) => setState({ ...state, day });

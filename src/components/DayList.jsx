@@ -9,7 +9,6 @@ import React from "react";
 import DayListItem from "./DayListItem";
 
 export default function DayList(props) {
-  console.log("props:", props);
   let array = props.days.map((day) => {
     const selected = props.value === day.name;
     return (
