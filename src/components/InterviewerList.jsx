@@ -7,11 +7,12 @@ import InterviewerListItem from "./InterviewerListItem";
 // onChange: function
 // value: number
 export default function InterviewerList(props) {
+  console.log("in Interviewer List props.value", props.value);
   let array = props.interviewers.map((interviewer) => {
     const selected = props.value === interviewer.id;
     return (
       <InterviewerListItem
-        // id={interviewer.id}
+        key={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
         selected={selected}

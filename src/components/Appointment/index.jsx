@@ -44,8 +44,7 @@ export default function Appointment(props) {
       )}
       {mode === CREATE && (
         <Form
-          // props.interviewers
-          interviewers={[]}
+          interviewers={props.interviewers}
           onSave={props.onSave}
           onCancel={back}
         />
