@@ -22,9 +22,9 @@ export default function Application() {
     return (
       <Appointment
         key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
+        {...appointment}
         interview={interview}
+        interviewers={state.interviewers}
       />
     );
   });
@@ -67,11 +67,7 @@ export default function Application() {
         />
       </section>
       <section className="schedule">
-        {dailyAppointments.map((appointment) => {
-          return (
-            <Appointment key={appointment.id} {...appointment}></Appointment>
-          );
-        })}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
