@@ -18,6 +18,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 //status(loading)
 const SAVING = "SAVING";
 const DELETING = "DELETING";
@@ -57,13 +58,24 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
-          onEdit={props.onEdit}
+          onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
+
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+          interviewers={props.interviewers}
+          onSave={save}
+          onCancel={back}
+        />
+      )}
+
       {/* async operations ? status (saving or deleting) */}
       {mode === SAVING && <Status message="Saving" />}
 
@@ -77,6 +89,7 @@ export default function Appointment(props) {
           message="ARE YOU SURE YOU WANT TO DELETE?!"
         />
       )}
+
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
       {/* <Error message="Could not delete appointment." onClose={props.onClose} />
       form a user inputs their information, saves it, and edits it. */}

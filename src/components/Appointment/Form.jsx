@@ -14,9 +14,9 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function Form(props) {
-  console.log("rposps:", props);
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  console.log("interviewername:", props.interviewer);
 
   const reset = function () {
     setStudent("");
@@ -46,7 +46,7 @@ export default function Form(props) {
         <InterviewerList
           interviewers={props.interviewers}
           onChange={setInterviewer}
-          value={interviewer}
+          value={interviewer.id}
         />
       </section>
       <section className="appointment__card-right">
