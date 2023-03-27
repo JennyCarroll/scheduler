@@ -17,7 +17,10 @@ import useVisualMode from "hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const CONFIRM = "CONFIRM";
+//status(loading)
 const SAVING = "SAVING";
+const DELETING = "DELETING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -31,6 +34,11 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview).then(() => transition(SHOW));
+  }
+
+  function confirm() {
+    transition(DELETING);
+    props.cancelInterview(props.id).then(() => transition(EMPTY));
   }
 
   return (
@@ -50,22 +58,25 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
           onEdit={props.onEdit}
-          onDelete={props.onDelete}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
         <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
       {/* async operations ? status (saving or deleting) */}
-      {mode === SAVING && <Status message={props.message} />}
+      {mode === SAVING && <Status message="Saving" />}
+
+      {mode === DELETING && <Status message="Deleting" />}
 
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
-      {/* <Confirm
-        //doesn't the below have to be onClick with a conditional?
-        onConfirm={props.onConfirm}
-        onCancel={props.onCancel}
-        message={props.message}
-      /> */}
+      {mode === CONFIRM && (
+        <Confirm
+          onConfirm={confirm}
+          onCancel={back}
+          message="ARE YOU SURE YOU WANT TO DELETE?!"
+        />
+      )}
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
       {/* <Error message="Could not delete appointment." onClose={props.onClose} />
       form a user inputs their information, saves it, and edits it. */}

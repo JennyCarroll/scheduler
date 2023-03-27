@@ -1,3 +1,5 @@
+// paste /api/debug/reset. in the browser for the api server (8001) to reset the database
+
 import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
@@ -22,8 +24,6 @@ export default function Application() {
 
   function bookInterview(id, interview) {
     //allows us to change the local state when we book an interview
-    console.log("this is the log", id, interview);
-
     return axios
       .put(`/api/appointments/${id}`, { interview })
       .then((response) => {
@@ -41,6 +41,23 @@ export default function Application() {
       });
   }
 
+  function cancelInterview(id) {
+    return axios.delete(`/api/appointments/${id}`).then((response) => {
+      setState((prev) => {
+        const appointment = {
+          ...prev.appointments[id],
+          interview: null,
+        };
+        const appointments = {
+          ...prev.appointments,
+          [id]: appointment,
+        };
+        //spreading prev (which is all state) and changing just the appointments object of objects)
+        return { ...prev, appointments };
+      });
+    });
+  }
+
   //transform the code before passing it as a prop to the appointment
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -52,6 +69,7 @@ export default function Application() {
         interview={interview}
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });

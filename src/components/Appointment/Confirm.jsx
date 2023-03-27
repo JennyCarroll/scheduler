@@ -3,7 +3,7 @@ import Button from "components/Button";
 
 // The <Confirm> component should accept the following props:
 
-// message:String eg. "Delete the appointment?"
+// message:String
 // onConfirm:Function to be called when the user clicks the Confirm button
 // onCancel:Function to be called when the user clicks the Cancel button
 
@@ -12,10 +12,10 @@ export default function Confirm(props) {
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">{props.message}</h1>
       <section className="appointment__actions">
-        <Button onClick={props.onConfirm} danger>
+        <Button onClick={props.onCancel} danger>
           Cancel
         </Button>
-        <Button onClick={props.onCancel} danger>
+        <Button onClick={props.onConfirm} danger>
           Confirm
         </Button>
       </section>
