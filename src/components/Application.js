@@ -19,8 +19,29 @@ export default function Application() {
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
-  console.log("interviewersForDay:", interviewersForDay);
-  //transfor the code before passing it as a prop to the appointment
+
+  function bookInterview(id, interview) {
+    //allows us to change the local state when we book an interview
+    console.log("this is the log", id, interview);
+
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then((response) => {
+        setState((prev) => {
+          const appointment = {
+            ...prev.appointments[id],
+            interview: { ...interview },
+          };
+          const appointments = {
+            ...prev.appointments,
+            [id]: appointment,
+          };
+          return { ...prev, appointments };
+        });
+      });
+  }
+
+  //transform the code before passing it as a prop to the appointment
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
@@ -30,6 +51,7 @@ export default function Application() {
         {...appointment}
         interview={interview}
         interviewers={interviewersForDay}
+        bookInterview={bookInterview}
       />
     );
   });

@@ -17,11 +17,22 @@ import useVisualMode from "hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    transition(SAVING);
+    props.bookInterview(props.id, interview).then(() => transition(SHOW));
+  }
+
   return (
     <article className="appointment">
       {/* header displays the time for the appointment with a separater */}
@@ -43,12 +54,11 @@ export default function Appointment(props) {
         />
       )}
       {mode === CREATE && (
-        <Form
-          interviewers={props.interviewers}
-          onSave={props.onSave}
-          onCancel={back}
-        />
+        <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
       )}
+      {/* async operations ? status (saving or deleting) */}
+      {mode === SAVING && <Status message={props.message} />}
+
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
       {/* <Confirm
         //doesn't the below have to be onClick with a conditional?
@@ -56,8 +66,6 @@ export default function Appointment(props) {
         onCancel={props.onCancel}
         message={props.message}
       /> */}
-      {/* async operations ? status (saving or deleting) */}
-      {/* <Status message={props.message} /> */}
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
       {/* <Error message="Could not delete appointment." onClose={props.onClose} />
       form a user inputs their information, saves it, and edits it. */}
