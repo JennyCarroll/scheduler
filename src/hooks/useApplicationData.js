@@ -24,6 +24,22 @@ export default function useApplicationData() {
       }));
     });
   }, []);
+  //you can only use prev in the callback of a setter
+  //findIndex is for when the objects in an array are complex objects
+  function updateSpots(type) {
+    const copy = [...state.days];
+    for (let day of copy) {
+      if (day.name === state.day) {
+        if (type === "subtract") {
+          day.spots = day.spots - 1;
+        }
+        if (type === "add") {
+          day.spots = day.spots + 1;
+        }
+      }
+    }
+    return copy;
+  }
 
   function bookInterview(id, interview) {
     //allows us to change the local state when we book an interview
@@ -39,7 +55,8 @@ export default function useApplicationData() {
             ...prev.appointments,
             [id]: appointment,
           };
-          return { ...prev, appointments };
+          const days = updateSpots("subtract");
+          return { ...prev, appointments, days: days };
         });
       });
   }
@@ -55,8 +72,8 @@ export default function useApplicationData() {
           ...prev.appointments,
           [id]: appointment,
         };
-        //spreading prev (which is all state) and changing just the appointments object of objects)
-        return { ...prev, appointments };
+        const days = updateSpots("add");
+        return { ...prev, appointments, days: days };
       });
     });
   }
