@@ -22,6 +22,9 @@ const EDIT = "EDIT";
 //status(loading)
 const SAVING = "SAVING";
 const DELETING = "DELETING";
+//errors
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -34,12 +37,18 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => transition(SHOW));
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   }
 
   function confirm() {
-    transition(DELETING);
-    props.cancelInterview(props.id).then(() => transition(EMPTY));
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   }
 
   return (
@@ -91,8 +100,13 @@ export default function Appointment(props) {
       )}
 
       {/* error (saving  or deleting, when close button is clicked onClose action is called) */}
-      {/* <Error message="Could not delete appointment." onClose={props.onClose} />
-      form a user inputs their information, saves it, and edits it. */}
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save appointment." onClose={back} />
+      )}
+
+      {mode === ERROR_DELETE && (
+        <Error message="Could not delete appointment." onClose={back} />
+      )}
     </article>
   );
 }
