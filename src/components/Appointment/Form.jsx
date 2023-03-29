@@ -45,6 +45,7 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             onChange={(event) => {
               setStudent(event.target.value);
+              setError("");
             }}
             name="name"
             type="text"
@@ -55,7 +56,10 @@ export default function Form(props) {
         <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
-          onChange={setInterviewer}
+          onChange={(interviewer_) => {
+            setInterviewer(interviewer_);
+            setError("");
+          }}
           value={interviewer}
         />
       </section>

@@ -52,7 +52,7 @@ export default function Appointment(props) {
   }
 
   return (
-    <article className="appointment">
+    <article data-testid="appointment" className="appointment">
       {/* header displays the time for the appointment with a separater */}
       <Header time={props.time} />
       {/* every other component is shown conditionally */}
