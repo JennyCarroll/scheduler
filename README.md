@@ -4,8 +4,17 @@ A single page application built using React and tested by Jest, Storybook and Cy
 
 Book, edit and delete appointments for each day of the week and see how many spots are left!
 
-##DEMO VIDEO
-<img src=”GITHUB-URL?raw=true”/>
+## Tech Stack
+
+React (Webpack, Babel)
+Axios
+Storybook, Jest, Cypress
+
+## Final Product
+
+!["Screenshot of interview scheduler"](https://github.com/JennyCarroll/scheduler/blob/main/docs/interview-scheduler.png?raw=true)
+
+!["Gif of booking appointment"](https://github.com/JennyCarroll/scheduler/blob/main/docs/appointment-form.gif?raw=true)
 
 ## Setup
 
@@ -29,14 +38,4 @@ npm test
 npm run storybook
 ```
 
-<!-- should I list the dependencies?    -->
-
-<!-- You can add video with a .gif.  Record your screen with command shift 5 and then convert the video to a gif.  Then add the demo video like this ##DEMO VIDEO
-<img src=”GITHUB-URL?raw=true”/> -->
-
-<!-- Development focuses on a single page application (SPA) called Interview Scheduler, built using React.
-Data is persisted by the API server using a PostgreSQL database.
-The client application communicates with an API server over HTTP, using the JSON format.
-Jest tests are used through the development of the project. -->
-
-<!-- // paste /api/debug/reset. in the browser for the api server (8001) to reset the database -->
+This application is designed to run concurrently with an existing PostgreSQL database through [scheduler-api](https://github.com/JennyCarroll/scheduler-api). The client application communicates with the API server over HTTP, using the JSON format.
