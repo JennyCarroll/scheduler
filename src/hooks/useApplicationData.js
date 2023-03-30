@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Application from "../components/Application";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -24,18 +23,16 @@ export default function useApplicationData() {
       }));
     });
   }, []);
-  //you can only use prev in the callback of a setter
-  //findIndex is for when the objects in an array are complex objects
+
   function updateSpots(type) {
     const index = state.days.findIndex((day) => day.name === state.day);
     const copy = [...state.days];
     let newDay;
-    //the objects inside state.days array of objects are still objects
+
     for (let day of copy) {
       if (day.name === state.day) {
         newDay = { ...day };
         if (type === "subtract") {
-          //this is mutating state before the set state is happening.  the indiviual object in days are still pointing to the state
           newDay.spots = newDay.spots - 1;
         }
         if (type === "add") {
@@ -48,18 +45,6 @@ export default function useApplicationData() {
     }
     copy[index] = newDay;
     return copy;
-  }
-  //this is the way that they expected us to solve it
-  function updateSpots2(appointments, appointmentId) {
-    const foundDay = state.days.find((d) =>
-      d.appointments.includes(appointmentId)
-    );
-    const spots = foundDay.appointments.filter(
-      (id) => appointments[id].interview === null
-    ).length;
-    return state.days.map((d) =>
-      d.appointments.includes(appointmentId) ? { ...d, spots } : d
-    );
   }
 
   function bookInterview(id, interview) {
@@ -80,11 +65,6 @@ export default function useApplicationData() {
             state.appointments[id].interview === null ? "subtract" : "edit";
           const days = updateSpots(isEdit);
           return { ...prev, appointments, days: days };
-          // return {
-          //   ...prev,
-          //   appointments,
-          //   days: updateSpots2(appointments, id),
-          // };
         });
       });
   }
@@ -102,12 +82,10 @@ export default function useApplicationData() {
         };
         const days = updateSpots("add");
         return { ...prev, appointments, days: days };
-        // return { ...prev, appointments, days: updateSpots2(appointments, id) };
       });
     });
   }
 
-  //state = day,  days, appts.  take day and replace it with day
   const setDay = (day) => setState({ ...state, day });
 
   return { state, setDay, bookInterview, cancelInterview };

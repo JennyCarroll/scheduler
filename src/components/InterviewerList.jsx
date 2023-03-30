@@ -3,10 +3,6 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 import PropTypes from "prop-types";
 
-// is being passed
-// interviewers: array
-// onChange: function
-// value: number
 export default function InterviewerList(props) {
   let array = props.interviewers.map((interviewer) => {
     const selected = props.value === interviewer.id;

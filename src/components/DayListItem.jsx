@@ -1,6 +1,3 @@
-// If selected, this module is responsible for displaying the name, interview spots remaining,
-// also the user must be able to select a particular day to view the interview information for that day.
-
 import React from "react";
 import "components/DayListItem.scss";
 import classNames from "classnames";

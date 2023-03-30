@@ -1,8 +1,6 @@
 import React from "react";
 
-// Our <Status> component only needs to accept the following props:
-
-// message:String eg. "Deleting"
+// Displays a message during async operations
 
 export default function Status(props) {
   return (

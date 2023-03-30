@@ -1,4 +1,3 @@
-// paste /api/debug/reset. in the browser for the api server (8001) to reset the database
 import React from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
@@ -18,7 +17,6 @@ export default function Application() {
   //transform the code before passing it as a prop to the appointment
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-
     return (
       <Appointment
         key={appointment.id}
@@ -56,4 +54,3 @@ export default function Application() {
     </main>
   );
 }
-//jsx is just html and javascript together inside a javascript file.  Html only exists inside the returns

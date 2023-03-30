@@ -9,20 +9,13 @@ import Error from "./Error";
 import Form from "./Form";
 import useVisualMode from "hooks/useVisualMode";
 
-// A user will be able to create, edit and delete an appointment
-// The <Appointment> component will display differently depending
-// on what kind of task the user is completing. Each of these views
-// (Empty, Show(booked), Form, Confirm, Status(loading) and Error) will be child components
-// of the <Appointment> component.
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
-//status(loading)
 const SAVING = "SAVING";
 const DELETING = "DELETING";
-//errors
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
@@ -55,6 +48,7 @@ export default function Appointment(props) {
     <article data-testid="appointment" className="appointment">
       {/* header displays the time for the appointment with a separater */}
       <Header time={props.time} />
+
       {/* every other component is shown conditionally */}
       {mode === EMPTY && (
         <Empty
@@ -87,7 +81,6 @@ export default function Appointment(props) {
 
       {/* async operations ? status (saving or deleting) */}
       {mode === SAVING && <Status message="Saving" />}
-
       {mode === DELETING && <Status message="Deleting" />}
 
       {/* before deleting an appointment confirm (cancel button triggers onCancel action, confirm button triggers onConfirm action) */}
@@ -95,7 +88,7 @@ export default function Appointment(props) {
         <Confirm
           onConfirm={confirm}
           onCancel={back}
-          message="ARE YOU SURE YOU WANT TO DELETE?!"
+          message="Are you sure you want to delete?"
         />
       )}
 
@@ -103,7 +96,6 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && (
         <Error message="Could not save appointment." onClose={back} />
       )}
-
       {mode === ERROR_DELETE && (
         <Error message="Could not delete appointment." onClose={back} />
       )}

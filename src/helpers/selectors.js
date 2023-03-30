@@ -12,7 +12,7 @@ export function getAppointmentsForDay(state, day) {
       }
     }
   }
-  //output is an array of appointment objects (state.appointments)
+  //output is an array of appointment objects
   return output;
 }
 
@@ -22,7 +22,7 @@ export function getInterviewersForDay(state, day) {
   if (arrayOfDayObj.length === 0) {
     return [];
   }
-  //return an array of interviewer objects for a given day.
+  //return an array of interviewer objects for a given day
   for (let interviewer of arrayOfDayObj[0].interviewers) {
     for (let interviewerId in state.interviewers) {
       if (interviewer === Number(interviewerId)) {
@@ -30,25 +30,9 @@ export function getInterviewersForDay(state, day) {
       }
     }
   }
-  //output is an array of interviewer objects (state.interviewers)
+  //output is an array of interviewer objects
   return output;
 }
-
-// export function getInterviewersForDay(state, days) {
-//   // console.log(state.days);
-//   const filterDays = state.days.filter((day) => day.name === days);
-//   if (filterDays.length < 1) {
-//     return [];
-//   }
-//   const filteredInteviewers = filterDays[0].interviewers.map(
-//     (interviewerKey) => state.interviewers[interviewerKey]
-//   );
-//   //does it have to be an array?  why can't I just put  it in curly braces above with interviewerKey in front?
-//   console.log("filteredInteviewers:", filteredInteviewers);
-//   console.log("filterdays:", filterDays);
-
-//   return filteredInteviewers;
-// }
 
 export function getInterview(state, interview) {
   if (interview === null) {

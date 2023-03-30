@@ -17,6 +17,3 @@ export default function Button(props) {
     </button>
   );
 }
-
-/* <></>; */
-/* <Button confirm>Confirm</Button> */
