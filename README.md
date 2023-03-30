@@ -4,6 +4,9 @@ A single page application built using React and tested by Jest, Storybook and Cy
 
 Book, edit and delete appointments for each day of the week and see how many spots are left!
 
+##DEMO VIDEO
+<img src=”GITHUB-URL?raw=true”/>
+
 ## Setup
 
 Install dependencies with `npm install`.
