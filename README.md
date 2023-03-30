@@ -21,3 +21,8 @@ npm test
 ```sh
 npm run storybook
 ```
+
+<!-- Development focuses on a single page application (SPA) called Interview Scheduler, built using React.
+Data is persisted by the API server using a PostgreSQL database.
+The client application communicates with an API server over HTTP, using the JSON format.
+Jest tests are used through the development of the project. -->
